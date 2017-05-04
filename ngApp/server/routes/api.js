@@ -40,13 +40,32 @@ router.get('/videos/:id', (req, res) => {
   });
 });
 
-router.post('/videos', (req, res) => {
+router.post('/video', (req, res) => {
   var video = new Video(req.body);
   video.save((err, video) => {
     if(err) {
       res.json({"err": err});
     } else {
       res.json(video)
+    }
+  });
+});
+
+router.put('/video/:id', (req, res) => {
+  Video.findById(req.params.id, (err, video) => {
+    if(err) {
+      res.json({'err': err});
+    } else {
+      if(req.body.title) video.title = req.body.title;
+      if(req.body.description) video.description = req.body.description;
+      if(req.body.url) video.url = req.body.url;
+      video.save((err, video) => {
+        if(err) {
+          res.json({'err' : err});
+        } else {
+          res.json(video);
+        }
+      });
     }
   });
 });
