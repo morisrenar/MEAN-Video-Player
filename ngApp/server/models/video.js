@@ -8,4 +8,4 @@ var videoSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('video', videoSchema, 'videos');
+module.exports = mongoose.model('video', videoSchema);
