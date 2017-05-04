@@ -70,4 +70,14 @@ router.put('/video/:id', (req, res) => {
   });
 });
 
+router.delete('/video/:id', (req, res) => {
+  Video.findByIdAndRemove(req.params.id, (err, video) => {
+    if(err) {
+      res.json({'err': err});
+    } else {
+      res.json({"deleted": true});
+    }
+  });
+});
+
 module.exports = router;
